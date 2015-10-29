@@ -11,8 +11,8 @@
 
 using namespace std;
 
-class Nucleus{
- public:
+class Nucleus {
+public:
   Nucleus(char*);
   Nucleus(int, int, double, const char*);
   Nucleus(int Z, int N, char*);

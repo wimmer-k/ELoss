@@ -64,7 +64,10 @@ Nucleus::Nucleus(int charge, int neutrons, char* MassFile){
   double emass;
   char tmp[256];
   ifstream mass_file;
+  fMass = 0;
   mass_file.open(MassFile,ios::in);
+  fMassExcess = -1;
+  fSymbol = "XX";
   while(!mass_file.bad() && !mass_file.eof() && i < 3008){
     mass_file>>n;
     mass_file>>z;
@@ -127,7 +130,6 @@ int Nucleus::GetZfromSymbol(char* symbol){
   return 0;
 
 }
-
 int Nucleus::GetZ(){
   return fZ;
 }
