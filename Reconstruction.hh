@@ -49,6 +49,7 @@ public:
   TSpline3* Energy2Range(double emax, double size);
   TSpline3* Range2Energy(double emax, double size);
   TSpline3* Energy2EnergyLoss(double emax, double size);
+  TSpline3* EnergyLoss2Energy(double emax, double size);
   TSpline3* Energy2EnergyAfter(double emax, double size);
   TGraph* EnergyAfter2Energy(double emax, double size);
 private:

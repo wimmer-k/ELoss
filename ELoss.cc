@@ -13,6 +13,7 @@
 
 #include "CommandLineInterface.hh"
 #include "Compound.hh"
+#include "Nucleus.hh"
 #include "Reconstruction.hh"
 
 using namespace std;
@@ -39,7 +40,7 @@ int main(int argc, char* argv[]){
   //if(outfile->IsZombie()){
   //  return 4;
   //}
-  char* massFile = (char*)"/user/wimmer/analysis/eloss/mass.dat";
+  char* massFile = (char*)"/home/wimmer/progs/reaction/mass.dat";
 
   Nucleus *proj;
   Nucleus *targ;
@@ -49,7 +50,7 @@ int main(int argc, char* argv[]){
     proj = new Nucleus(projectile[1],projectile[0], massFile);
   }
   else{
-    cerr<<"no or incorrect Projectile provided!";
+    //cerr<<"no or incorrect Projectile provided!";
     for(int i=0; i<projectile.size(); i++){
       cerr<<projectile[i]<<" ";
     }
@@ -60,6 +61,7 @@ int main(int argc, char* argv[]){
   if(target.size() == 2){
     //cout << "target Z " << target[1] << " N " << target[0] << endl;
     targ = new Nucleus(target[1],target[0], massFile);
+    //cout << "target created starting compound" << endl; 
     targetmat = new Compound(targ);
     cout << "calculating energy loss of " <<  proj->GetSymbol() << " in " << thick << " mg/cm^2 " << targ->GetSymbol() << endl;
   }
@@ -74,10 +76,8 @@ int main(int argc, char* argv[]){
     }
     exit(1);
   }
-
   Reconstruction *eloss = new Reconstruction(proj, targetmat);
   eloss->SetTargetThickness(thick);
-
 
   if(enpu.size()==1){
     cout << "beam energy " << enpu[0] << " [MeV/u] = " << enpu[0]*proj->GetA() << " [MeV]" << endl;
