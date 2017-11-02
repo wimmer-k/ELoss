@@ -13,22 +13,7 @@ Compound::Compound(char* symbol){
     exit(1);
   }
   fSymbol = symbol;
-  if(strstr(symbol,"PE")){
-    cout << "Polyethylene!" << endl;
-    //H4C2
-    SetNofElements(2);
-    fNuclei = new Nucleus*[2];
-    fFrac = new double[2];
-
-    fNuclei[0] = new Nucleus(1,0,massfile);
-    fNuclei[1] = new Nucleus(6,6,massfile);
-
-    fFrac[0] = 4.*fNuclei[0]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());
-    fFrac[1] = 2.*fNuclei[1]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());
-
-    fMass = fNuclei[0]->GetMass()*4. + fNuclei[1]->GetMass()*2.;
-  }
-  else if(strstr(symbol,"DPE")){
+  if(strstr(symbol,"DPE")){
     cout << "deuterated Polyethylene!" << endl;
     //D4C2
     SetNofElements(2);
@@ -36,6 +21,21 @@ Compound::Compound(char* symbol){
     fFrac = new double[2];
 
     fNuclei[0] = new Nucleus(1,1,massfile);
+    fNuclei[1] = new Nucleus(6,6,massfile);
+
+    fFrac[0] = 4.*fNuclei[0]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());
+    fFrac[1] = 2.*fNuclei[1]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());
+
+    fMass = fNuclei[0]->GetMass()*4. + fNuclei[1]->GetMass()*2.;
+  }
+  else if(strstr(symbol,"PE")){
+    cout << "Polyethylene!" << endl;
+    //H4C2
+    SetNofElements(2);
+    fNuclei = new Nucleus*[2];
+    fFrac = new double[2];
+
+    fNuclei[0] = new Nucleus(1,0,massfile);
     fNuclei[1] = new Nucleus(6,6,massfile);
 
     fFrac[0] = 4.*fNuclei[0]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());

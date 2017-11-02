@@ -9,7 +9,7 @@ ROOTLIBS     := $(shell root-config --libs)
 ROOTGLIBS    := $(shell root-config --glibs)
 ROOTINC      := -I$(shell root-config --incdir)
 
-COMMON_DIR = $(HOME)/common
+COMMON_DIR = $(HOME)/TINAanalysis/common
 
 
 BASELIBS  = -lm $(ROOTLIBS) $(ROOTGLIBS) -L$(LIB_DIR)
@@ -65,4 +65,4 @@ ReconstructionDictionary.cc: Reconstruction.hh ReconstructionLinkDef.h
 	 rm -f ReconstructionDictionary.cc ReconstructionDictionary.h; rootcint -f $@ -c Reconstruction.hh ReconstructionLinkDef.h 
 
 clean:
-	rm *.o ELoss
+	rm *.o *Dictionary.* ELoss
