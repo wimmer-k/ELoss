@@ -28,6 +28,8 @@ CFLAGS += -Wl,--no-as-needed
 LFLAGS += -Wl,--no-as-needed
 DFLAGS += -Wl,--no-as-needed
 
+CFLAGS += -DMASSFILE=\"/home/daq/TINAanalysis/ELoss/mass.dat\"
+
 O_FILES = Nucleus.o \
 	Compound.o \
 	Reconstruction.o 

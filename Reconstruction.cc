@@ -3,20 +3,20 @@
 using namespace std;
 
 Reconstruction::Reconstruction(){
-};
+}
 Reconstruction::Reconstruction(Nucleus* projectile, Compound* target, double thickness){
   SetTargetThickness(thickness);
   SetProj(projectile);
   SetTarget(target);
-};
+}
 Reconstruction::Reconstruction(Nucleus* projectile, Compound* target){
   SetProj(projectile);
   SetTarget(target);
-};
+}
 double Reconstruction::StoppingPower(double energy, bool gaseous = false){
   double stopping = 0;
   for(int i=0;i<fTarget->GetNofElements();i++){
-    //cout << fTarget->GetNucleus(i)->GetA() <<" "<< " with fraction " << fTe Carget->GetFrac(i) << endl;
+    //cout << fTarget->GetNucleus(i)->GetA() <<" "<< " with fraction " << fTarget->GetFrac(i) << endl;
     stopping += fTarget->GetFrac(i)*StoppingPower(fTarget->GetNucleus(i), energy, gaseous);
   }
   return stopping;
@@ -117,7 +117,7 @@ double Reconstruction::StoppingPower(Nucleus* target, double energy, bool gaseou
       }
     }
   }  
-};
+}
 double Reconstruction::CompoundRange(double energy, int limit){
   int z_p = fProj->GetZ();
   double a_p = fProj->GetA();
@@ -149,7 +149,7 @@ double Reconstruction::CompoundRange(double energy, int limit){
   return range;
   
 
-};
+}
 double Reconstruction::EnergyAfter(double energy, int limit){ // return lost energy!
   double en;
   double range;
@@ -185,7 +185,7 @@ double Reconstruction::EnergyAfter(double energy, int limit){ // return lost ene
     dedx = StoppingPower(en);
   }
 
-};
+}
 double Reconstruction::EnergyStraggling(double dE_dx, double dE_dx_after_target, double energy_loss){
   //see H. Schmidt-Boeking in Lecture Notes in Physics 83 (1978)
   double z_p = fProj->GetZ();
@@ -214,7 +214,7 @@ double Reconstruction::AngularStraggling(double energy){
     return 0;
   }
   double ang = 0;
-  double z_eff;
+  double z_eff=0;
   double tau;
   double exponent;
 
@@ -290,7 +290,7 @@ TSpline3* Reconstruction::Energy2Range(double emax, double size){
   delete[] range;
   delete[] energy;
   return spline;
-};
+}
 
 TSpline3* Reconstruction::Range2Energy(double emax, double size){
   double* range = new double[(int)(emax/size)+1];
@@ -307,7 +307,7 @@ TSpline3* Reconstruction::Range2Energy(double emax, double size){
   delete[] range;
   delete[] energy;
   return spline;
-};
+}
 
 TSpline3* Reconstruction::Energy2EnergyLoss(double emax, double size){
   double* eloss = new double[(int)(emax/size)+1];
@@ -324,7 +324,7 @@ TSpline3* Reconstruction::Energy2EnergyLoss(double emax, double size){
   delete[] eloss;
   delete[] energy;
   return spline;
-};
+}
 TSpline3* Reconstruction::EnergyLoss2Energy(double emax, double size){
   double* eloss = new double[(int)(emax/size)+1];
   double* energy = new double[(int)(emax/size)+1];
@@ -346,7 +346,7 @@ TSpline3* Reconstruction::EnergyLoss2Energy(double emax, double size){
   delete[] eloss;
   delete[] energy;
   return spline;
-};
+}
 TSpline3* Reconstruction::Energy2EnergyAfter(double emax, double size){
   double* eloss = new double[(int)(emax/size)+1];
   double* energy = new double[(int)(emax/size)+1];
@@ -376,7 +376,7 @@ TSpline3* Reconstruction::Energy2EnergyAfter(double emax, double size){
   delete[] eloss;
   delete[] energy;
   return spline;
-};
+}
 TGraph* Reconstruction::EnergyAfter2Energy(double emax, double size){
   double* eloss = new double[(int)(emax/size)+1];
   double* energy = new double[(int)(emax/size)+1];
@@ -402,7 +402,7 @@ TGraph* Reconstruction::EnergyAfter2Energy(double emax, double size){
   delete[] eloss;
   delete[] energy;
   return graph;
-};
+}
 
 double Reconstruction::a_h(int index, int z)
 {

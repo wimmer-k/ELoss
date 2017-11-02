@@ -40,18 +40,18 @@ int main(int argc, char* argv[]){
   //if(outfile->IsZombie()){
   //  return 4;
   //}
-  char* massFile = (char*)"/home/wimmer/progs/reaction/mass.dat";
+
 
   Nucleus *proj;
   Nucleus *targ;
 
   if(projectile.size() == 2){
     //cout << "projectile Z " << projectile[1] << " N " << projectile[0] << endl;
-    proj = new Nucleus(projectile[1],projectile[0], massFile);
+    proj = new Nucleus(projectile[1],projectile[0], (char*)MASSFILE);
   }
   else{
     //cerr<<"no or incorrect Projectile provided!";
-    for(int i=0; i<projectile.size(); i++){
+    for(ushort i=0; i<projectile.size(); i++){
       cerr<<projectile[i]<<" ";
     }
     cerr<<endl;
@@ -60,7 +60,7 @@ int main(int argc, char* argv[]){
   Compound *targetmat;
   if(target.size() == 2){
     //cout << "target Z " << target[1] << " N " << target[0] << endl;
-    targ = new Nucleus(target[1],target[0], massFile);
+    targ = new Nucleus(target[1],target[0], (char*)MASSFILE);
     //cout << "target created starting compound" << endl; 
     targetmat = new Compound(targ);
     cout << "calculating energy loss of " <<  proj->GetSymbol() << " in " << thick << " mg/cm^2 " << targ->GetSymbol() << endl;
@@ -71,7 +71,7 @@ int main(int argc, char* argv[]){
   }
   else{    
     cerr<<"flag -p provided but not two arguments following: ";
-    for(int i=0; i<target.size(); i++){
+    for(ushort i=0; i<target.size(); i++){
       cerr<<target[i]<<" ";
     }
     exit(1);

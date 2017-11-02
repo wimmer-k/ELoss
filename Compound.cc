@@ -2,9 +2,6 @@
 
 using namespace std;
 
-//#define debug
-
-static char* massfile=(char*)"/home/wimmer/progs/eloss/mass.dat";
 Compound::Compound(char* symbol){
   int length = strlen(symbol);
   if(length == 0){
@@ -21,12 +18,12 @@ Compound::Compound(char* symbol){
     fNuclei = new Nucleus*[2];
     fFrac = new double[2];
 
-    fNuclei[0] = new Nucleus(1,1,massfile);
-    fNuclei[1] = new Nucleus(6,6,massfile);
+    fNuclei[0] = new Nucleus(1,1,(char*)MASSFILE);
+    fNuclei[1] = new Nucleus(6,6,(char*)MASSFILE);
 
     fFrac[0] = 4.*fNuclei[0]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());
     fFrac[1] = 2.*fNuclei[1]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());
-
+    cout << "fFrac[0] = "<< fFrac[0] << "fFrac[1] = "<< fFrac[1] << endl;
     fMass = fNuclei[0]->GetMass()*4. + fNuclei[1]->GetMass()*2.;
   }
   else if(strstr(symbol,"PE")){
@@ -38,8 +35,8 @@ Compound::Compound(char* symbol){
     fNuclei = new Nucleus*[2];
     fFrac = new double[2];
 
-    fNuclei[0] = new Nucleus(1,0,massfile);
-    fNuclei[1] = new Nucleus(6,6,massfile);
+    fNuclei[0] = new Nucleus(1,0,(char*)MASSFILE);
+    fNuclei[1] = new Nucleus(6,6,(char*)MASSFILE);
 
     fFrac[0] = 4.*fNuclei[0]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());
     fFrac[1] = 2.*fNuclei[1]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());
@@ -55,9 +52,9 @@ Compound::Compound(char* symbol){
     fNuclei = new Nucleus*[3];
     fFrac = new double[3];
 
-    fNuclei[0] = new Nucleus(1,0,massfile);
-    fNuclei[1] = new Nucleus(6,6,massfile);
-    fNuclei[2] = new Nucleus(8,8,massfile);
+    fNuclei[0] = new Nucleus(1,0,(char*)MASSFILE);
+    fNuclei[1] = new Nucleus(6,6,(char*)MASSFILE);
+    fNuclei[2] = new Nucleus(8,8,(char*)MASSFILE);
 
     fFrac[0] = 8.*fNuclei[0]->GetMass()/(8.*fNuclei[0]->GetMass() + 10.*fNuclei[1]->GetMass() + 4.*fNuclei[2]->GetMass());
     fFrac[1] = 10.*fNuclei[1]->GetMass()/(8.*fNuclei[0]->GetMass() + 10.*fNuclei[1]->GetMass() + 4.*fNuclei[2]->GetMass());
@@ -84,8 +81,8 @@ Compound::Compound(char* symbol){
       SetNofElements(2);
       fNuclei = new Nucleus*[2];
       fFrac = new double[2];
-      fNuclei[0] = new Nucleus(1,2,massfile);
-      fNuclei[1] = new Nucleus(22,26,massfile);
+      fNuclei[0] = new Nucleus(1,2,(char*)MASSFILE);
+      fNuclei[1] = new Nucleus(22,26,(char*)MASSFILE);
       fFrac[0] = ratio*fNuclei[0]->GetMass()/(ratio*fNuclei[0]->GetMass()+fNuclei[1]->GetMass());
       fFrac[1] = fNuclei[1]->GetMass()/(ratio*fNuclei[0]->GetMass()+fNuclei[1]->GetMass());
       
@@ -110,9 +107,9 @@ Compound::Compound(char* symbol){
       fNuclei = new Nucleus*[2];
       fFrac = new double[2];
 
-      fNuclei[0] = new Nucleus(1,1,massfile);
+      fNuclei[0] = new Nucleus(1,1,(char*)MASSFILE);
       fFrac[0] = ratio/(1+ratio);
-      fNuclei[1] = new Nucleus(22,26,massfile);
+      fNuclei[1] = new Nucleus(22,26,(char*)MASSFILE);
       fFrac[1] = 1/(1+ratio);
 
       fMass = fNuclei[0]->GetMass()*fFrac[0] + fNuclei[1]->GetMass()*fFrac[1];
