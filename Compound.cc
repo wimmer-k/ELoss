@@ -23,7 +23,7 @@ Compound::Compound(char* symbol){
 
     fFrac[0] = 4.*fNuclei[0]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());
     fFrac[1] = 2.*fNuclei[1]->GetMass()/(4.*fNuclei[0]->GetMass() + 2.*fNuclei[1]->GetMass());
-    cout << "fFrac[0] = "<< fFrac[0] << "fFrac[1] = "<< fFrac[1] << endl;
+    //cout << "fFrac[0] = "<< fFrac[0] << "fFrac[1] = "<< fFrac[1] << endl;
     fMass = fNuclei[0]->GetMass()*4. + fNuclei[1]->GetMass()*2.;
   }
   else if(strstr(symbol,"PE")){
