@@ -65,4 +65,4 @@ ReconstructionDictionary.cc: Reconstruction.hh ReconstructionLinkDef.h
 	 rm -f ReconstructionDictionary.cc ReconstructionDictionary.h; rootcint -f $@ -c Reconstruction.hh ReconstructionLinkDef.h 
 
 clean:
-	rm *.o *Dictionary.* ELoss
+	rm -f *.o *Dictionary.* ELoss

@@ -2,10 +2,9 @@
 
 using namespace std;
 
-#define debug
+//#define debug
 
 static char* massfile=(char*)"/home/wimmer/progs/eloss/mass.dat";
-static double amu = 931.494043;
 Compound::Compound(char* symbol){
   int length = strlen(symbol);
   if(length == 0){
@@ -14,7 +13,9 @@ Compound::Compound(char* symbol){
   }
   fSymbol = symbol;
   if(strstr(symbol,"DPE")){
+#ifdef debug
     cout << "deuterated Polyethylene!" << endl;
+#endif
     //D4C2
     SetNofElements(2);
     fNuclei = new Nucleus*[2];
@@ -29,7 +30,9 @@ Compound::Compound(char* symbol){
     fMass = fNuclei[0]->GetMass()*4. + fNuclei[1]->GetMass()*2.;
   }
   else if(strstr(symbol,"PE")){
+#ifdef debug
     cout << "Polyethylene!" << endl;
+#endif
     //H4C2
     SetNofElements(2);
     fNuclei = new Nucleus*[2];
@@ -44,7 +47,9 @@ Compound::Compound(char* symbol){
     fMass = fNuclei[0]->GetMass()*4. + fNuclei[1]->GetMass()*2.;
   }
   else if(strstr(symbol,"MY")){
+#ifdef debug
     cout << "Mylar!" << endl;
+#endif
     //H8C10O4
     SetNofElements(3);
     fNuclei = new Nucleus*[3];
@@ -63,7 +68,9 @@ Compound::Compound(char* symbol){
 
   }
   else if(strstr(symbol,"TTI")){
+#ifdef debug
     cout << "Tritiated Titanium Target!" << endl;
+#endif
     // ratioTTI = atomic ratio Tritium/Titanium
     if(isalpha(symbol[0])){
       cerr<<"give atomic ratio of Tritium to Titanium!"<< endl;
@@ -71,7 +78,9 @@ Compound::Compound(char* symbol){
     }
     else{
       double ratio = atof(symbol);
-      //cout << ratio << endl;
+#ifdef debug
+      cout << ratio << endl;
+#endif
       SetNofElements(2);
       fNuclei = new Nucleus*[2];
       fFrac = new double[2];
@@ -85,14 +94,18 @@ Compound::Compound(char* symbol){
       
   }
   else if(strstr(symbol,"DTI")){
-    //cout << "Deuterated Titanium Target!" << endl;
+#ifdef debug
+    cout << "Deuterated Titanium Target!" << endl;
+#endif
     if(isalpha(symbol[0])){
       cerr<<"give atomic ratio of Deuterium to Titanium!"<< endl;
       exit(1);
     }
     else{
       double ratio = atof(symbol);
+#ifdef debug
       cout << ratio << endl;
+#endif
       SetNofElements(2);
       fNuclei = new Nucleus*[2];
       fFrac = new double[2];
@@ -116,7 +129,7 @@ Compound::Compound(Nucleus* target){
   fFrac = new double[1];
   fNuclei[0] = target;
   fFrac[0] = 1;
-  
+  fSymbol = (char*)target->GetSymbol();
 }
 Compound::Compound(Nucleus* n1, double f1, Nucleus* n2, double f2){
   SetNofElements(2);
