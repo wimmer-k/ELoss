@@ -325,6 +325,26 @@ TSpline3* Reconstruction::Energy2EnergyLoss(double emax, double size){
   delete[] energy;
   return spline;
 }
+TSpline3* Reconstruction::EnergyAfter2EnergyLoss(double emax, double size){
+  double* eloss = new double[(int)(emax/size)+1];
+  double* after = new double[(int)(emax/size)+1];
+  int ctr = 0;
+  for(int i=0;i<(emax/size);i++){
+    double denergy = emax - i*size;
+    double deloss = EnergyLoss(denergy,-5);//*1000.; //conversion to keV
+    if(deloss < denergy){
+      eloss[ctr]=deloss;
+      after[ctr]=denergy-deloss;
+      ctr++;
+    }
+  }
+  TGraph* graph = new TGraph(ctr, after, eloss);
+  TSpline3* spline = new TSpline3("EnergyAfter2EnergyLoss",graph);
+  delete graph;
+  delete[] eloss;
+  delete[] after;
+  return spline;
+}
 TSpline3* Reconstruction::EnergyLoss2Energy(double emax, double size){
   double* eloss = new double[(int)(emax/size)+1];
   double* energy = new double[(int)(emax/size)+1];
