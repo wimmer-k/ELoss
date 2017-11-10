@@ -330,7 +330,7 @@ TSpline3* Reconstruction::EnergyAfter2EnergyLoss(double emax, double size){
   double* after = new double[(int)(emax/size)+1];
   int ctr = 0;
   for(int i=0;i<(emax/size);i++){
-    double denergy = emax - i*size;
+    double denergy = i*size;
     double deloss = EnergyLoss(denergy,-5);//*1000.; //conversion to keV
     if(deloss < denergy){
       eloss[ctr]=deloss;
